@@ -1,0 +1,14 @@
+apiVersion: cstor.openebs.io/v1
+kind: CStorPoolCluster
+metadata:
+  name: cstor-storage
+  namespace: openebs
+spec:
+  pools:
+    - nodeSelector:
+        kubernetes.io/hostname: "gke-cstor-demo-default-pool-3385ab41-2hkc"
+      dataRaidGroups:
+      - blockDevices:
+          - blockDeviceName: "sparse-176cda34921fdae209bdd489fe72475d"
+      poolConfig:
+        dataRaidGroupType: "stripe"
