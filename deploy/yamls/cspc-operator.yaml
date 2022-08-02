@@ -24,6 +24,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: cspc-operator
         imagePullPolicy: IfNotPresent
@@ -89,6 +96,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: cvc-operator
         imagePullPolicy: IfNotPresent
@@ -171,6 +185,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: admission-webhook
           image: openebs/cstor-webhook:ci

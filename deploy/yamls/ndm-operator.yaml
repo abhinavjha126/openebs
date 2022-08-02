@@ -459,6 +459,13 @@ spec:
       # host PID is used to check status of iSCSI Service when the NDM
       # API service is enabled
       #hostPID: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: node-disk-manager
         image: openebs/node-disk-manager:ci
@@ -576,6 +583,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: node-disk-operator
           image: openebs/node-disk-operator:ci
@@ -643,6 +657,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: ndm-cluster-exporter
           image: openebs/node-disk-exporter:ci
@@ -714,6 +735,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: node-disk-exporter
           image: openebs/node-disk-exporter:ci

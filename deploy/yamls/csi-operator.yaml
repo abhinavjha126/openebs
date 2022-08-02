@@ -955,6 +955,13 @@ spec:
     spec:
       priorityClassName: openebs-cstor-csi-controller-critical
       serviceAccount: openebs-cstor-csi-controller-sa
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: csi-resizer
           image: k8s.gcr.io/sig-storage/csi-resizer:v1.2.0
@@ -1212,6 +1219,13 @@ spec:
       priorityClassName: openebs-cstor-csi-node-critical
       serviceAccount: openebs-cstor-csi-node-sa
       hostNetwork: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: csi-node-driver-registrar
           image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
