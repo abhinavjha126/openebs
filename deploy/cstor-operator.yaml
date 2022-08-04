@@ -3707,8 +3707,8 @@ data:
       - key: path-filter
         name: path filter
         state: true
-        include: ""
-        exclude: "/dev/loop,/dev/fd0,/dev/sr0,/dev/ram,/dev/md,/dev/dm-,/dev/rbd,/dev/zd"
+        include: "/dev/xvdb"
+        exclude: "/dev/loop,/dev/fd0,/dev/sr0,/dev/ram,/dev/md,/dev/dm-,/dev/rbd,/dev/zd,/dev/xvda,/dev/xvda1,/dev/xvda14,/dev/xvda15"
 ---
 apiVersion: apps/v1
 kind: DaemonSet
@@ -3747,6 +3747,13 @@ spec:
       # host PID is used to check status of iSCSI Service when the NDM
       # API service is enabled
       #hostPID: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: node-disk-manager
         image: openebs/node-disk-manager:ci
@@ -3864,6 +3871,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: node-disk-operator
           image: openebs/node-disk-operator:ci
@@ -3931,6 +3945,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: ndm-cluster-exporter
           image: openebs/node-disk-exporter:ci
@@ -4002,6 +4023,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: node-disk-exporter
           image: openebs/node-disk-exporter:ci
@@ -5262,6 +5290,13 @@ spec:
       priorityClassName: openebs-cstor-csi-node-critical
       serviceAccount: openebs-cstor-csi-node-sa
       hostNetwork: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: csi-node-driver-registrar
           image: k8s.gcr.io/sig-storage/csi-node-driver-registrar:v2.3.0
@@ -5392,6 +5427,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: cspc-operator
         imagePullPolicy: IfNotPresent
@@ -5457,6 +5499,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
       - name: cvc-operator
         imagePullPolicy: IfNotPresent
@@ -5539,6 +5588,13 @@ spec:
         openebs.io/version: dev
     spec:
       serviceAccountName: openebs-cstor-operator
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: node-role.kubernetes.io/edge
+                 operator: DoesNotExist
       containers:
         - name: admission-webhook
           image: openebs/cstor-webhook:ci
