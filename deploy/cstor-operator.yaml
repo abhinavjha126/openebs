@@ -3707,8 +3707,8 @@ data:
       - key: path-filter
         name: path filter
         state: true
-        include: ""
-        exclude: "/dev/loop,/dev/fd0,/dev/sr0,/dev/ram,/dev/md,/dev/dm-,/dev/rbd,/dev/zd"
+        include: "
+        exclude: "/dev/loop,/dev/fd0,/dev/sr0,/dev/ram,/dev/md,/dev/dm-,/dev/rbd,/dev/zd,
 ---
 apiVersion: apps/v1
 kind: DaemonSet
